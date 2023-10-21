@@ -11,7 +11,8 @@
     <string name="creators">Application Creators</string>
     <string name="creator_names">Names of the Creators:</string>
     <string name="creator_name_victor">Victor Lopez</string>
-    <string name="creator_name_dani">Dani</string>
+    <string name="creator_name_dani">Daniel Narvaez</string>
+    <string name="creator_name_david">David Rodriguez</string>
     <string name="app_description">Application Description:</string>
     <string name="app_description_text">This application allows dog walkers to coordinate real-time walks, create editable routes, and manage multiple registered clients.</string>
 

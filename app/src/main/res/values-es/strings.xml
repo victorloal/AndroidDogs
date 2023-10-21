@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Dogs</string>
+    <string name="hint_username">Nombre Usuario</string>
+    <string name="hint_password">Contraseña</string>
+    <string name="login_button">Inicio sesion</string>
+    <string name="back_button">Atras</string>
+    <string name="hint_name">Nombre Completo</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_birthdate">Fecha nacimiento</string>
+    <string name="register_button">Registrar</string>
+    <string name="creators">Creadores de la aplicaioón</string>
+    <string name="creator_names">Nombresw de los creadores</string>
+    <string name="creator_name_victor">Victor Lopez</string>
+    <string name="creator_name_dani">Daniel Narvaez</string>
+    <string name="creator_name_david">David Rodruiguez</string>
+    <string name="app_description">Descripcion Aplicación</string>
+</resources>
