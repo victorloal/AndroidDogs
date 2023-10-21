@@ -35,6 +35,9 @@ class MainActivity : AppCompatActivity() {
         dialog.setCancelable(false)
         dialog.setContentView(R.layout.activity_user_login)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        val width = resources.displayMetrics.widthPixels
+        val height = resources.displayMetrics.heightPixels
+        dialog.window?.setLayout((width * 1).toInt(), (height * 0.9).toInt())
 
         val btLogin = dialog.findViewById<Button>(R.id.btLogin)
 
@@ -50,6 +53,9 @@ class MainActivity : AppCompatActivity() {
         dialog.setCancelable(false)
         dialog.setContentView(R.layout.activity_user_register)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        val width = resources.displayMetrics.widthPixels
+        val height = resources.displayMetrics.heightPixels
+        dialog.window?.setLayout((width * 1).toInt(), (height * 0.9).toInt())
 
         val btRegister = dialog.findViewById<Button>(R.id.btRegister)
 
@@ -64,6 +70,9 @@ class MainActivity : AppCompatActivity() {
         dialog.setCancelable(false)
         dialog.setContentView(R.layout.information)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        val width = resources.displayMetrics.widthPixels
+        val height = resources.displayMetrics.heightPixels
+        dialog.window?.setLayout((width * 1).toInt(), (height * 0.9).toInt())
 
         val btBack = dialog.findViewById<Button>(R.id.btBack)
 
