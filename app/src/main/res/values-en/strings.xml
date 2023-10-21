@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Dogs</string>
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
+    <string name="login_button">Log In</string>
+    <string name="back_button">Back</string>
+    <string name="hint_name">Full Name</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_birthdate">Birthdate (YYYY-MM-DD)</string>
+    <string name="register_button">Register</string>
+    <string name="creators">Application Creators</string>
+    <string name="creator_names">Names of the Creators:</string>
+    <string name="creator_name_victor">Víctor López</string>
+    <string name="creator_name_dani">Daniel Narváez</string>
+    <string name="app_description">Application Description:</string>
+    <string name="app_description_text">This application allows dog walkers to coordinate real-time walks, create editable routes, and manage multiple registered clients.</string>
+
+</resources>
