@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Dogs</string>
-    <string name="hint_username">Nombre Usuario</string>
+    <string name="hint_username">Nombre de Usuario</string>
     <string name="hint_password">Contraseña</string>
-    <string name="login_button">Inicio sesion</string>
-    <string name="back_button">Atras</string>
+    <string name="login_button">Iniciar sesión</string>
+    <string name="back_button">Atrás</string>
     <string name="hint_name">Nombre Completo</string>
-    <string name="hint_email">Email</string>
-    <string name="hint_birthdate">Fecha nacimiento</string>
+    <string name="hint_email">Correo Electrónico</string>
+    <string name="hint_birthdate">Fecha de Nacimiento</string>
     <string name="register_button">Registrar</string>
-    <string name="creators">Creadores de la aplicaioón</string>
-    <string name="creator_names">Nombresw de los creadores</string>
-    <string name="creator_name_victor">Victor Lopez</string>
-    <string name="creator_name_dani">Daniel Narvaez</string>
-    <string name="creator_name_david">David Rodruiguez</string>
-    <string name="app_description">Descripcion Aplicación</string>
+    <string name="creators">Creadores de la aplicación</string>
+    <string name="creator_names">Nombres de los creadores</string>
+    <string name="creator_name_victor">Víctor López</string>
+    <string name="creator_name_dani">Daniel Narváez</string>
+    <string name="creator_name_david">David Rodríguez</string>
+    <string name="app_description">Descripción de la Aplicación</string>
+    <string name="app_description_text">Esta aplicación permite a los paseadores de perros coordinar paseos en tiempo real, crear rutas editables y gestionar múltiples clientes registrados.</string>
 </resources>
