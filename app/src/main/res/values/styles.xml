@@ -1,10 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Theme_Text_Title_1">
-        <item name="android:textColor">@color/brown_3</item>
-        <item name="android:textSize">50dp</item>
+        <item name="android:textColor">@color/brown_1</item>
+        <item name="android:textSize">30dp</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginBottom">10dp</item>
     </style>
-
-
+    <style name="Theme_Text_Title_2">
+        <item name="android:textColor">@color/brown_1</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginBottom">10dp</item>
+    </style>
+    <style name="Theme_Text_Title_3">
+        <item name="android:textColor">@color/brown_3</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+    </style>
+    <style name="Theme_login">
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColorHint">@color/brown_1</item>
+        <item name="android:editTextColor">@color/brown_3</item>
+        <item name="android:buttonTint">@color/green_1</item>
+    </style>
+    <style name="Theme_primary_button">
+        <item name="android:textColor">@color/light_brown_1</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:backgroundTint">@color/brown_1</item>
+        <item name="android:layout_marginTop">120dp</item>
+        <item name="android:topRightRadius">50dp</item>
+        <item name="android:bottomRightRadius">50dp</item>
+        <item name="android:topLeftRadius">50dp</item>
+        <item name="android:bottomLeftRadius">50dp</item>
+    </style>
+    <style name="Theme_secondary_button">
+        <item name="android:textColor">@color/brown_1</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:backgroundTint">@color/light_brown_1</item>
+        <item name="android:layout_marginTop">120dp</item>
+        <item name="android:topRightRadius">50dp</item>
+        <item name="android:bottomRightRadius">50dp</item>
+        <item name="android:topLeftRadius">50dp</item>
+        <item name="android:bottomLeftRadius">50dp</item>
+    </style>
+    <style name="Theme_line">
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_width">10dp</item>
+        <item name="android:background">@color/brown_3</item>
+    </style>
+    <style name="Theme_card_view_main">
+        <item name="cardCornerRadius">25dp</item>
+        <item name="android:backgroundTint">@color/light_brown_2</item>
+    </style>
+    
 </resources>

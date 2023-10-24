@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Dogs</string>
+    <string name="title_sing_in">Sing In</string>
+    <string name="title_sing_up">Register</string>
     <string name="hint_username">Username</string>
     <string name="hint_password">Password</string>
     <string name="login_button">Log In</string>
@@ -8,8 +10,9 @@
     <string name="hint_name">Full Name</string>
     <string name="hint_email">Email</string>
     <string name="hint_birthdate">Birthdate (YYYY-MM-DD)</string>
-    <string name="register_button">Register</string>
+    <string name="register_button">Log Up</string>
     <string name="creators">Application Creators</string>
+    <string name="text_social_network">or connect using</string>
     <string name="creator_names">Names of the Creators:</string>
     <string name="creator_name_victor">Victor Lopez</string>
     <string name="creator_name_dani">Daniel Narvaez</string>

@@ -1,73 +1,188 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="4dp"
-    app:cardUseCompatPadding="true"
-    android:layout_margin="30dp"
-    android:backgroundTint="@color/light_brown_1">
-    <LinearLayout
+    >
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:background="@drawable/background_card_view_login"
+        android:theme="@style/Theme_login">
 
-        <EditText
-        android:id="@+id/editTextUsername"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/hint_username"
-        android:inputType="text"
-        android:autofillHints="@string/hint_username" />
-
-        <EditText
-            android:id="@+id/editTextPassword"
+        <TextView
+            android:id="@+id/tvTitleSingIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_password"
-            android:inputType="textPassword"
-            android:autofillHints="@string/hint_password" />
+            android:gravity="center"
+            android:text="@string/title_sing_up"
+            android:textAlignment="center"
 
-        <EditText
-            android:id="@+id/editTextName"
+            android:theme="@style/Theme_Text_Title_1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_app_foreground"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitleSingIn" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/linearLayoutCompat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_name"
-            android:inputType="text"
-            android:autofillHints="@string/hint_name" />
+            android:orientation="vertical"
+            android:theme="@style/Theme_login"
+            app:layout_constraintBottom_toTopOf="@+id/tvOrSocialNetwork"
+            app:layout_constraintTop_toBottomOf="@+id/ivLogo"
+            tools:layout_editor_absoluteX="25dp">
 
-        <EditText
-            android:id="@+id/editTextEmail"
-            android:layout_width="match_parent"
+            <EditText
+                android:id="@+id/editTextUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_username"
+                android:inputType="text"
+                android:autofillHints="@string/hint_username" />
+
+            <EditText
+                android:id="@+id/editTextPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_password"
+                android:inputType="textPassword"
+                android:autofillHints="@string/hint_password" />
+
+            <EditText
+                android:id="@+id/editTextName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_name"
+                android:inputType="text"
+                android:autofillHints="@string/hint_name" />
+
+            <EditText
+                android:id="@+id/editTextEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_email"
+                android:inputType="textEmailAddress"
+                android:autofillHints="@string/hint_email" />
+
+            <EditText
+                android:id="@+id/editTextBirthdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_birthdate"
+                android:inputType="date"
+                android:autofillHints="@string/hint_birthdate" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/register_button"
+                android:theme="@style/Theme_primary_button" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/login_button"
+                android:theme="@style/Theme_secondary_button" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <TextView
+            android:id="@+id/tvOrSocialNetwork"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_email"
-            android:inputType="textEmailAddress"
-            android:autofillHints="@string/hint_email" />
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/text_social_network"
+            android:textAlignment="center"
+            android:theme="@style/Theme_Text_Title_3"
+            app:layout_constraintBottom_toTopOf="@id/btFacebook"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat" />
 
-        <EditText
-            android:id="@+id/editTextBirthdate"
-            android:layout_width="match_parent"
+        <ImageButton
+            android:id="@+id/btFacebook"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_birthdate"
-            android:inputType="date"
-            android:autofillHints="@string/hint_birthdate" />
+            android:layout_marginTop="20dp"
+            android:background="@android:color/transparent"
+            android:maxWidth="10dp"
+            android:maxHeight="10dp"
+            android:src="@drawable/facebook"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvOrSocialNetwork"
 
-        <Spinner
-            android:id="@+id/spinnerGender"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            app:tint="@color/brown_3" />
 
-        <Button
-            android:id="@+id/btRegister"
-            android:layout_width="match_parent"
+        <ImageButton
+            android:id="@+id/btGmail"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/register_button"
-            android:textColor="@color/light_green_2" />
+            android:background="@android:color/transparent"
+            android:maxWidth="10dp"
+            android:maxHeight="10dp"
+            android:src="@drawable/gmail"
+            app:layout_constraintBottom_toBottomOf="@+id/btFacebook"
+            app:layout_constraintEnd_toEndOf="parent"
 
-    </LinearLayout>
+            app:layout_constraintStart_toEndOf="@+id/btFacebook"
+            app:layout_constraintTop_toTopOf="@+id/btFacebook"
+            app:tint="@color/brown_3" />
 
-</androidx.cardview.widget.CardView>
+        <ImageButton
+            android:id="@+id/btTwiter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:maxWidth="10dp"
+            android:maxHeight="10dp"
+            android:src="@drawable/twitter"
+            app:layout_constraintBottom_toBottomOf="@+id/btFacebook"
+            app:layout_constraintEnd_toStartOf="@+id/btFacebook"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btFacebook"
+            android:contentDescription="twitter"
+            app:tint="@color/brown_3" />
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:theme="@style/Theme_line"
+            app:layout_constraintBottom_toBottomOf="@+id/tvOrSocialNetwork"
+            app:layout_constraintEnd_toStartOf="@+id/tvOrSocialNetwork"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvOrSocialNetwork" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/brown_3"
+            app:layout_constraintBottom_toBottomOf="@+id/tvOrSocialNetwork"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvOrSocialNetwork"
+            app:layout_constraintTop_toTopOf="@+id/tvOrSocialNetwork" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
+
+

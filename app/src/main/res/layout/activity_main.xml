@@ -1,35 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:orientation="vertical">
+    android:background="@color/light_brown_1"
+    android:theme="@style/Theme_login"
+    tools:context=".MainActivity">
+
+
+    <ImageView
+        android:id="@+id/imBackgroundMain"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/background_card_view_main" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:src="@mipmap/ic_app_foreground"
+        app:layout_constraintVertical_bias="0.1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageButton
+        android:id="@+id/btInformation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|end"
+        android:background="@android:color/transparent"
+        android:scaleX="0.5"
+        android:scaleY="0.5"
+        android:src="@drawable/ic_info"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/green_1"/>
 
     <Button
         android:id="@+id/btRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:text="@string/register_button"
-        android:textColor="@color/light_green_2" />
+        android:theme="@style/Theme_primary_button"
+        app:layout_constraintBottom_toTopOf="@+id/btLogin" />
+
     <Button
         android:id="@+id/btLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:text="@string/login_button"
-        android:textColor="@color/light_green_2"/>
-    <ImageButton
-        android:id="@+id/btInformation"
-        android:layout_width="match_parent"
+        android:theme="@style/Theme_primary_button"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+
+    <androidx.cardview.widget.CardView
+        style="@style/Theme_card_view_main"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:src="@drawable/ic_information_foreground"
-        android:backgroundTint="@color/light_brown_1"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.25">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="20dp">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:src="@mipmap/ic_app" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:src="@mipmap/ic_app" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:src="@mipmap/ic_app" />
+
+            <androidx.appcompat.widget.SearchView
+                android:layout_width="135dp"
+                android:layout_height="match_parent"
+                android:hint="@string/title_sing_in"
+                android:text="buscar"
+                android:outlineAmbientShadowColor="@color/brown_1"
+                android:outlineSpotShadowColor="@color/brown_1">
+
+            </androidx.appcompat.widget.SearchView>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
 
+</androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.appcompat.widget.LinearLayoutCompat>
