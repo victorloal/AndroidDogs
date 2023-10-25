@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.Window
 import android.widget.Button
 import android.widget.ImageButton
+import com.google.firebase.analytics.FirebaseAnalytics
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,6 +29,7 @@ class MainActivity : AppCompatActivity() {
             showDialogInformation()
         }
 
+
     }
     private fun showDialogLogin() {
         val dialog = Dialog(this)
@@ -41,8 +43,14 @@ class MainActivity : AppCompatActivity() {
 
         val btLogin = dialog.findViewById<Button>(R.id.btLogin)
 
+
+        val analytics = FirebaseAnalytics.getInstance(this)
+        val bundle = Bundle()
+        bundle.putString("message","Integración de Firebase completa")
+        analytics.logEvent("InitScreen", bundle)
+
         btLogin.setOnClickListener {
-            dialog.dismiss()
+
         }
         dialog.show()
     }

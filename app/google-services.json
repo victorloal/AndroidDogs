@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "962455435496",
+    "project_id": "dogs-udenar",
+    "storage_bucket": "dogs-udenar.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:962455435496:android:4a9553367a1dc2985f715d",
+        "android_client_info": {
+          "package_name": "com.example.dogs"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCaFF-tG_WpMWik7SynaAnWsrAh2HH_t0A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
