@@ -37,12 +37,7 @@
         android:theme="@style/Theme_login"
         app:layout_constraintBottom_toTopOf="@+id/tvOrSocialNetwork"
         app:layout_constraintTop_toBottomOf="@+id/ivLogo"
-        tools:layout_editor_absoluteX="25dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="hola"/>
+        tools:layout_editor_absoluteX="43dp">
 
         <EditText
             android:id="@+id/editTextUsername"
