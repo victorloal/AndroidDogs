@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Messenger
 import android.view.Window
 import android.widget.Button
 import android.widget.EditText
@@ -20,79 +21,37 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        // FireBase Analytics
+        val analytics = FirebaseAnalytics.getInstance(this)
+        val bundle = Bundle()
+        bundle.putString(FirebaseAnalytics.Param.METHOD, "Email/Password")
+        analytics.logEvent(FirebaseAnalytics.Event.LOGIN, bundle)
+        //
         val cardView = findViewById<CardView>(R.id.cvUser)
         val btInformation = findViewById<ImageButton>(R.id.btInformation)
-
         val ibUser = findViewById<ImageButton>(R.id.ibUser)
-
+        //
         cardView.setCardBackgroundColor(Color.TRANSPARENT)
         cardView.setBackgroundColor(Color.TRANSPARENT)
+
+
+
+
+
+
         btInformation.setOnClickListener{
             showDialogInformation()
         }
         ibUser.setOnClickListener{
             showDialogLogin()
         }
-
-
     }
-
-
 
     private fun showDialogLogin() {
-        val dialog = Dialog(this)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(true)
-
-
-        dialog.setContentView(R.layout.activity_user_login)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        val width = resources.displayMetrics.widthPixels
-        val height = resources.displayMetrics.heightPixels
-        dialog.window?.setLayout((width * 0.8).toInt(), (height * 0.8).toInt())
-
-        val btLogin = dialog.findViewById<Button>(R.id.btLogin)
-
-
-        val analytics = FirebaseAnalytics.getInstance(this)
-        val bundle = Bundle()
-
-        val editTextUsername =dialog.findViewById<EditText>(R.id.editTextUsername)
-        val editTextPassword =dialog.findViewById<EditText>(R.id.editTextPassword)
-        bundle.putString("message","Integración de Firebase completa")
-        analytics.logEvent("InitScreen", bundle)
-
-        btLogin.setOnClickListener {
-            if (editTextUsername.text.isNotEmpty() && editTextPassword.text.isNotEmpty() ){
-                FirebaseAuth.getInstance()
-                    .createUserWithEmailAndPassword(editTextUsername.text.toString(),
-                        editTextPassword.text.toString()).addOnCompleteListener {
-
-                    }
-            }
-        }
-
-        dialog.show()
+        val customDialog = UserLogin(this)
+        customDialog.show()
     }
 
-    private fun showDialogRegister() {
-        val dialog = Dialog(this)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(true)
-        dialog.setContentView(R.layout.activity_user_register)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        val width = resources.displayMetrics.widthPixels
-        val height = resources.displayMetrics.heightPixels
-        dialog.window?.setLayout((width * 0.8).toInt(), (height * 0.8).toInt())
-
-        val btRegister = dialog.findViewById<Button>(R.id.btRegister)
-
-        btRegister.setOnClickListener {
-            dialog.dismiss()
-        }
-        dialog.show()
-    }
     private fun showDialogInformation() {
         val dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)

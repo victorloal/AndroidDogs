@@ -40,10 +40,10 @@
         tools:layout_editor_absoluteX="43dp">
 
         <EditText
-            android:id="@+id/editTextUsername"
+            android:id="@+id/editTextEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_username"
+            android:hint="@string/hint_email"
             android:inputType="text" />
 
         <EditText

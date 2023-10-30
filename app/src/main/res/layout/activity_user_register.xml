@@ -74,16 +74,10 @@
                 android:inputType="textEmailAddress"
                 android:autofillHints="@string/hint_email" />
 
-            <EditText
-                android:id="@+id/editTextBirthdate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/hint_birthdate"
-                android:inputType="date"
-                android:autofillHints="@string/hint_birthdate" />
+
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btLogin"
+                android:id="@+id/btRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -91,7 +85,7 @@
                 android:theme="@style/Theme_primary_button" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btRegister"
+                android:id="@+id/btLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
