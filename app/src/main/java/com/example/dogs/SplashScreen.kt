@@ -34,7 +34,6 @@ class SplashScreen : AppCompatActivity() {
             // Alternar colores en un bucle
             val colorResId = colorArray[i % colorArray.size]
 
-
             // Asignar el color del recurso
             textView.setTextColor(resources.getColor(colorResId, null))
 

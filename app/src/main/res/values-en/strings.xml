@@ -23,4 +23,6 @@
     <string name="username_empty">The username field is empty.</string>
 
     <string name="app_description_text">This application allows dog walkers to coordinate real-time walks, create editable routes, and manage multiple registered clients.</string>
+    <string name="hint_repeat_password">Repeat password</string>
+    <string name="password_difer">Passwords do not match</string>
 </resources>

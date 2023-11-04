@@ -38,6 +38,7 @@ class UserRegister(context: Context) : Dialog(context) {
         val email = findViewById<EditText>(R.id.editTextEmail)?.text.toString()
         val username = findViewById<EditText>(R.id.editTextUsername)?.text.toString()
         val password = findViewById<EditText>(R.id.editTextPassword)?.text.toString()
+        val rep_password = findViewById<EditText>(R.id.editTextPassword)?.text.toString()
 
         if (email.isEmpty()) {
             Toast.makeText(context, R.string.email_empty, Toast.LENGTH_SHORT).show()
@@ -48,19 +49,23 @@ class UserRegister(context: Context) : Dialog(context) {
         } else if (username.isEmpty()) {
             Toast.makeText(context, R.string.username_empty, Toast.LENGTH_SHORT).show()
         } else {
-            // Todas las variables tienen contenido, puedes proceder con el registro
-            FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    val firebaseAnalytics = FirebaseAnalytics.getInstance(context)
-                    val bundle = Bundle()
-                    bundle.putString(FirebaseAnalytics.Param.METHOD, "Email/Password")
-                    firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SIGN_UP, bundle)
-                } else {
-                    // Hubo un error al registrar al usuario, puedes manejar el error aquí
-                }
+            if (password == rep_password) {
+                // Todas las variables tienen contenido, puedes proceder con el registro
+                FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            val firebaseAnalytics = FirebaseAnalytics.getInstance(context)
+                            val bundle = Bundle()
+                            bundle.putString(FirebaseAnalytics.Param.METHOD, "Email/Password")
+                            firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SIGN_UP, bundle)
+                        } else {
+                            // Hubo un error al registrar al usuario, puedes manejar el error aquí
+                        }
+                    }
+            }else{
+                Toast.makeText(context, R.string.password_difer, Toast.LENGTH_SHORT).show()
             }
         }
-
     }
 
 

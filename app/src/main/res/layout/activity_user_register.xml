@@ -18,8 +18,7 @@
             android:gravity="center"
             android:text="@string/title_sing_up"
             android:textAlignment="center"
-
-            android:theme="@style/Theme_Text_Title_1"
+            style="@style/Theme_Text_Title_1"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
@@ -59,6 +58,14 @@
                 android:autofillHints="@string/hint_password" />
 
             <EditText
+                android:id="@+id/editTextPassword2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_repeat_password"
+                android:inputType="textPassword"
+                android:autofillHints="@string/hint_password" />
+
+            <EditText
                 android:id="@+id/editTextName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -73,8 +80,6 @@
                 android:hint="@string/hint_email"
                 android:inputType="textEmailAddress"
                 android:autofillHints="@string/hint_email" />
-
-
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btRegister"

@@ -35,10 +35,6 @@ class MainActivity : AppCompatActivity() {
         cardView.setBackgroundColor(Color.TRANSPARENT)
 
 
-
-
-
-
         btInformation.setOnClickListener{
             showDialogInformation()
         }
