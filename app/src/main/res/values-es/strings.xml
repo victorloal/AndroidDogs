@@ -16,6 +16,7 @@
     <string name="text_social_network">o conectate usando</string>
     <string name="creator_name_victor">Víctor López</string>
     <string name="creator_name_dani">Daniel Narváez</string>
+    <string name="creator_name_david">David Rodríguez</string>
     <string name="app_description">Descripción de la Aplicación</string>
     <string name="email_empty">El campo de correo electrónico está vacío.</string>
     <string name="password_empty">El campo de contraseña está vacío.</string>
@@ -25,4 +26,8 @@
     <string name="app_description_text">Esta aplicación permite a los paseadores de perros coordinar paseos en tiempo real, crear rutas editables y gestionar múltiples clientes registrados.</string>
     <string name="hint_repeat_password">Repetir contraseña</string>
     <string name="password_difer">Contraseñas no coiciden</string>
+    <string name="message_welcome">Bienvenido</string>
+    <string name="message_authentication_required">Necesitas autenticarte</string>
+    <string name="message_register_success">Registro exitoso</string>
+    <string name="message_login_success">Inicio de sesión exitoso</string>
 </resources>

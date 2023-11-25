@@ -14,8 +14,9 @@ import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseAuth
+import com.example.dogs.OnLoginResultListener
 
-class UserLogin(context: Context) : Dialog(context) {
+class UserLogin(context: Context, private val loginResultListener: OnLoginResultListener) : Dialog(context) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_login)
@@ -32,7 +33,7 @@ class UserLogin(context: Context) : Dialog(context) {
         setCancelable(true)
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         btLogup.setOnClickListener {
-            val customDialog = UserRegister(context)
+            val customDialog = UserRegister(context, loginResultListener)
             customDialog.show()
             dismiss()
         }
@@ -61,14 +62,17 @@ class UserLogin(context: Context) : Dialog(context) {
             FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     // Inicio de sesión exitoso, puedes redirigir al usuario a la pantalla principal u otra actividad
-                    Toast.makeText(context, "Sesión iniciada", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, R.string.message_login_success, Toast.LENGTH_SHORT).show()
                     val firebaseAnalytics = FirebaseAnalytics.getInstance(context)
                     val bundle = Bundle()
                     bundle.putString(FirebaseAnalytics.Param.METHOD, "Email/Password")
                     firebaseAnalytics.logEvent(FirebaseAnalytics.Event.LOGIN, bundle)
+                    loginResultListener.onLoginSuccess()
+                    dismiss()
                 } else {
                     // Hubo un error al iniciar sesión, puedes manejar el error aquí
                     Toast.makeText(context, "Credenciales incorrectas", Toast.LENGTH_SHORT).show()
+                    loginResultListener.onLoginFailure()
                 }
             }
         }

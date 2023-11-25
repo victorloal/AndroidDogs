@@ -36,6 +36,7 @@
                 android:contentDescription="twitter"
                 app:tint="@color/green_1" />
             <TextView
+                android:id="@+id/txtUser"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="0.4"
@@ -68,6 +69,16 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cvUser" >
+
+        <TextView
+            android:id="@+id/txtWelcome"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.4"
+            android:background="@android:color/transparent"
+            android:src="@drawable/round_person_24"
+            android:text="@string/message_authentication_required"
+            android:gravity="center"/>
 
 
     </FrameLayout>
