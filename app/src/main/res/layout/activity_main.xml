@@ -35,6 +35,7 @@
                 android:src="@drawable/round_person_24"
                 android:contentDescription="twitter"
                 app:tint="@color/green_1" />
+
             <TextView
                 android:id="@+id/txtUser"
                 android:layout_width="match_parent"
@@ -42,7 +43,7 @@
                 android:layout_weight="0.4"
                 android:background="@android:color/transparent"
                 android:src="@drawable/round_person_24"
-                android:text="Usuario"
+                android:text="@string/login_button"
                 android:gravity="center"/>
 
 

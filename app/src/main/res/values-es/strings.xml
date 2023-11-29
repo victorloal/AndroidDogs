@@ -6,6 +6,7 @@
     <string name="title_sing_in">Iniciar sesión</string>
     <string name="title_sing_up">Regístrate</string>
     <string name="login_button">Iniciar sesión</string>
+    <string name="logout_button">Cerrar Sesión</string>
     <string name="back_button">Atrás</string>
     <string name="hint_name">Nombre Completo</string>
     <string name="hint_email">Correo Electrónico</string>

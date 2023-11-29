@@ -2,10 +2,12 @@ package com.example.dogs
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.service.autofill.UserData
 import android.util.Log
 import android.view.Window
 import android.widget.Button
@@ -45,36 +47,19 @@ class MainActivity : AppCompatActivity(), OnLoginResultListener {
             showDialogInformation()
         }
         ibUser.setOnClickListener{
-            showDialogLogin()
-        }
+            val currentUser = FirebaseAuth.getInstance().currentUser
 
-        val user = FirebaseAuth.getInstance().currentUser
-        val dbReference = FirebaseDatabase.getInstance().getReference("User")
+            if (currentUser != null) {
+                // El usuario ya ha iniciado sesión, mostrar el diálogo DataUserActivity
+                showDialogUserData()
 
-        user?.uid?.let { uid ->
-            val userDB = dbReference.child(uid)
+            } else {
+                // El usuario no ha iniciado sesión, mostrar el diálogo de inicio de sesión
+                showDialogLogin()
+                val txtWelcome = findViewById<TextView>(R.id.txtWelcome)
+                txtWelcome.text = getString(R.string.message_authentication_required)
 
-            userDB.addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.exists()) {
-                        // Obtiene los datos del usuario desde la base de datos
-                        val fullName = snapshot.child("full_name").getValue(String::class.java)
-                        val email = snapshot.child("email").getValue(String::class.java)
-                        val username = snapshot.child("username").getValue(String::class.java)
-
-                        // Actualiza los TextView con los datos obtenidos
-                        val txtUser = findViewById<TextView>(R.id.txtUser)
-                        txtUser.text = "$username"
-                    } else {
-                        // El usuario no tiene datos en la base de datos
-                    }
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    // Maneja el error de lectura de la base de datos
-                    Log.e("LecturaBD", "Error al leer datos: ${error.message}")
-                }
-            })
+            }
         }
     }
 
@@ -101,11 +86,55 @@ class MainActivity : AppCompatActivity(), OnLoginResultListener {
         dialog.show()
     }
 
+    private fun showDialogUserData() {
+        val userDataDialog = DataUserActivity(this, this)
+        userDataDialog.show()
+    }
+
+    private fun obtenerDatosUsuario() {
+        val user = FirebaseAuth.getInstance().currentUser
+        val dbReference = FirebaseDatabase.getInstance().getReference("User")
+
+        user?.uid?.let { uid ->
+            val userDB = dbReference.child(uid)
+
+            userDB.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()) {
+                        // Obtiene los datos del usuario desde la base de datos
+                        val username = snapshot.child("username").getValue(String::class.java)
+                        val full_name = snapshot.child("full_name").getValue(String::class.java)
+                        val email = snapshot.child("email").getValue(String::class.java)
+
+                        // Llama al método en la interfaz para actualizar la interfaz de usuario
+                        onUserDataUpdated(username ?: "") // Si username es nulo, usa una cadena vacía
+                    } else {
+                        // El usuario no tiene datos en la base de datos
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    // Maneja el error de lectura de la base de datos
+                    Log.e("LecturaBD", "Error al leer datos: ${error.message}")
+                }
+            })
+        }
+    }
+
+    fun onUserDataUpdated(username: String) {
+        runOnUiThread {
+            // Actualiza el TextView con los datos obtenidos
+            val txtUser = findViewById<TextView>(R.id.txtUser)
+            txtUser.text = username
+        }
+    }
+
     override fun onLoginSuccess() {
         runOnUiThread {
             // Actualizar el TextView con el mensaje de bienvenida
             val txtWelcome = findViewById<TextView>(R.id.txtWelcome)
             txtWelcome.text = getString(R.string.message_welcome)
+            obtenerDatosUsuario()
         }
     }
 
@@ -115,5 +144,14 @@ class MainActivity : AppCompatActivity(), OnLoginResultListener {
             val txtWelcome = findViewById<TextView>(R.id.txtWelcome)
             txtWelcome.text = getString(R.string.message_authentication_required)
         }
+    }
+
+    override fun onLogout(){
+        // Actualizar el TextView con el mensaje de autenticación requerida
+        val txtWelcome = findViewById<TextView>(R.id.txtWelcome)
+        txtWelcome.text = getString(R.string.message_authentication_required)
+        val txtUser = findViewById<TextView>(R.id.txtUser)
+        txtUser.text = getString(R.string.login_button)
+
     }
 }

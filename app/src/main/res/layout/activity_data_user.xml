@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_card_view_login"
+    android:orientation="vertical"
+    android:theme="@style/Theme_login">
+
+    <TextView
+        android:id="@+id/tvTitleUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        tools:text="Usuario"
+        android:layout_marginTop="30dp"
+        android:textAlignment="center"
+        style="@style/Theme_Text_Title_1"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_app_foreground"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitleUser" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/linearLayoutCompat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:theme="@style/Theme_login"
+        app:layout_constraintTop_toBottomOf="@+id/ivLogo"
+        tools:layout_editor_absoluteX="43dp">
+
+        <TextView
+            android:id="@+id/tvTitleFullname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hint_name"
+            android:textStyle="bold"
+            android:layout_marginTop="30dp"/>
+
+        <TextView
+            android:id="@+id/tvFullname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Name"
+            android:textSize="18dp"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/tvTitleEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hint_email"
+            android:textStyle="bold"
+            android:layout_marginTop="30dp"/>
+
+        <TextView
+            android:id="@+id/tvEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Email"
+            android:layout_marginTop="10dp"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btLogout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:text="@string/logout_button"
+            android:theme="@style/Theme_primary_button" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

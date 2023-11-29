@@ -6,6 +6,7 @@
     <string name="hint_username">Username</string>
     <string name="hint_password">Password</string>
     <string name="login_button">Log In</string>
+    <string name="logout_button">Log Out</string>
     <string name="back_button">Back</string>
     <string name="hint_name">Full Name</string>
     <string name="hint_email">Email</string>
