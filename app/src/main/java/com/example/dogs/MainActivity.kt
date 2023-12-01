@@ -14,8 +14,13 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.example.dogs.OnLoginResultListener
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -60,6 +65,17 @@ class MainActivity : AppCompatActivity(), OnLoginResultListener {
                 onLoginFailure()
             }
         }
+
+        val navView: BottomNavigationView = findViewById(R.id.bottom_navigation)
+        val navController = supportFragmentManager.findFragmentById(R.id.bottom_navigation)?.findNavController() ?: return
+
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.navigation_home, R.id.navigation_profile, R.id.navigation_search, R.id.navigation_settings
+            )
+        )
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
     }
 
     private fun showDialogLogin() {
