@@ -85,6 +85,7 @@ class UserRegister(context: Context, private val loginResultListener: OnLoginRes
                             val bundle = Bundle()
                             bundle.putString(FirebaseAnalytics.Param.METHOD, "Email/Password")
                             firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SIGN_UP, bundle)
+                            loginResultListener.onLoginSuccess()
                             dismiss()
                         } else {
                             // Hubo un error al registrar al usuario, puedes manejar el error aquí

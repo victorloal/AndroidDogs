@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity(), OnLoginResultListener {
 
         val userLogin = UserLogin(this,this)
 
+        validateLogin()
 
         btInformation.setOnClickListener{
             showDialogInformation()
@@ -56,9 +57,7 @@ class MainActivity : AppCompatActivity(), OnLoginResultListener {
             } else {
                 // El usuario no ha iniciado sesión, mostrar el diálogo de inicio de sesión
                 showDialogLogin()
-                val txtWelcome = findViewById<TextView>(R.id.txtWelcome)
-                txtWelcome.text = getString(R.string.message_authentication_required)
-
+                onLoginFailure()
             }
         }
     }
@@ -103,8 +102,6 @@ class MainActivity : AppCompatActivity(), OnLoginResultListener {
                     if (snapshot.exists()) {
                         // Obtiene los datos del usuario desde la base de datos
                         val username = snapshot.child("username").getValue(String::class.java)
-                        val full_name = snapshot.child("full_name").getValue(String::class.java)
-                        val email = snapshot.child("email").getValue(String::class.java)
 
                         // Llama al método en la interfaz para actualizar la interfaz de usuario
                         onUserDataUpdated(username ?: "") // Si username es nulo, usa una cadena vacía
@@ -130,6 +127,7 @@ class MainActivity : AppCompatActivity(), OnLoginResultListener {
     }
 
     override fun onLoginSuccess() {
+        // Separar los procesos en sus respectivos hilos
         runOnUiThread {
             // Actualizar el TextView con el mensaje de bienvenida
             val txtWelcome = findViewById<TextView>(R.id.txtWelcome)
@@ -153,5 +151,16 @@ class MainActivity : AppCompatActivity(), OnLoginResultListener {
         val txtUser = findViewById<TextView>(R.id.txtUser)
         txtUser.text = getString(R.string.login_button)
 
+    }
+
+    private fun validateLogin(){
+        val currentUser = FirebaseAuth.getInstance().currentUser
+
+        if (currentUser != null) {
+            onLoginSuccess()
+
+        } else {
+            onLoginFailure()
+        }
     }
 }
