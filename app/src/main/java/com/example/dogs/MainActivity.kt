@@ -38,12 +38,9 @@ class MainActivity : AppCompatActivity(), OnLoginResultListener {
         bundle.putString(FirebaseAnalytics.Param.METHOD, "Email/Password")
         analytics.logEvent(FirebaseAnalytics.Event.LOGIN, bundle)
         //
-        val cardView = findViewById<CardView>(R.id.cvUser)
         val btInformation = findViewById<ImageButton>(R.id.btInformation)
         val ibUser = findViewById<ImageButton>(R.id.ibUser)
         //
-        cardView.setCardBackgroundColor(Color.TRANSPARENT)
-        cardView.setBackgroundColor(Color.TRANSPARENT)
 
         val userLogin = UserLogin(this,this)
 

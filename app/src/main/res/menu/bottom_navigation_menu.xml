@@ -6,14 +6,11 @@
         android:icon="@drawable/ic_info" />
     <item
         android:id="@+id/navigation_profile"
-        android:title="Perfil"
-        android:icon="@drawable/profile" />
+        android:title="Perfil" />
     <item
         android:id="@+id/navigation_search"
-        android:title="Buscar"
-        android:icon="@drawable/search" />
+        android:title="Buscar"/>
     <item
         android:id="@+id/navigation_settings"
-        android:title="Configuración"
-        android:icon="@drawable/btn4" />
+        android:title="Configuración"/>
 </menu>
