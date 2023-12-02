@@ -43,6 +43,8 @@ class DataUserActivity (context: Context, private val loginResultListener: OnLog
 
     private fun obtenerDatosUsuario() {
         val user = FirebaseAuth.getInstance().currentUser
+
+        //Decirle a la app como se llama la tabla dentro de Realtime Database de Firebase
         val dbReference = FirebaseDatabase.getInstance().getReference("User")
 
         user?.uid?.let { uid ->
