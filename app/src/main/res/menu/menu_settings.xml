@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- menu_settings.xml -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_settings_menu"
+        android:title="Configuraciones"
+        android:icon="@drawable/twitter"
+        app:showAsAction="ifRoom" />
+</menu>

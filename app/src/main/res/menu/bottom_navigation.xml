@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/homeFragment"
+        android:icon="@android:drawable/ic_input_add"
+        android:title="Home" />
+    <item
+        android:id="@+id/explorarFragment"
+        android:icon="@android:drawable/ic_delete"
+        android:title="Explorar" />
+    <item
+        android:id="@+id/solicitudesFragment"
+        android:icon="@android:drawable/ic_lock_idle_alarm"
+        android:title="Solicitudes" />
+    <item
+        android:id="@+id/trabajosFragment"
+        android:icon="@android:drawable/ic_lock_idle_alarm"
+        android:title="Trabajos" />
+    <item
+        android:id="@+id/perfilFragment"
+        android:icon="@android:drawable/ic_lock_idle_alarm"
+        android:title="Perfil" />
+</menu>

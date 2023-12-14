@@ -9,11 +9,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.service.autofill.UserData
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.view.Window
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -26,27 +30,29 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+class HomeFragment : Fragment(), OnLoginResultListener {
 
-class MainActivity : AppCompatActivity(), OnLoginResultListener {
-    @SuppressLint("MissingInflatedId")
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        // FireBase Analytics
-        val analytics = FirebaseAnalytics.getInstance(this)
-        val bundle = Bundle()
-        bundle.putString(FirebaseAnalytics.Param.METHOD, "Email/Password")
-        analytics.logEvent(FirebaseAnalytics.Event.LOGIN, bundle)
-        //
-        val btInformation = findViewById<ImageButton>(R.id.btInformation)
-        val ibUser = findViewById<ImageButton>(R.id.ibUser)
-        //
-        val userLogin = UserLogin(this,this)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_home, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val btInformation = view.findViewById<ImageButton>(R.id.btInformation)
+        val ibUser = view.findViewById<ImageButton>(R.id.ibUser)
+
+        val userLogin = UserLogin(requireContext(), this)
         validateLogin()
-        btInformation.setOnClickListener{
+
+        btInformation.setOnClickListener {
             showDialogInformation()
         }
-        ibUser.setOnClickListener{
+
+        ibUser.setOnClickListener {
             val currentUser = FirebaseAuth.getInstance().currentUser
             if (currentUser != null) {
                 // El usuario ya ha iniciado sesión, mostrar el diálogo DataUserActivity
@@ -60,12 +66,12 @@ class MainActivity : AppCompatActivity(), OnLoginResultListener {
     }
 
     private fun showDialogLogin() {
-        val customDialog = UserLogin(this,this)
+        val customDialog = UserLogin(requireContext(), this)
         customDialog.show()
     }
 
     private fun showDialogInformation() {
-        val dialog = Dialog(this)
+        val dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(true)
         dialog.setContentView(R.layout.information)
@@ -83,7 +89,7 @@ class MainActivity : AppCompatActivity(), OnLoginResultListener {
     }
 
     private fun showDialogUserData() {
-        val userDataDialog = DataUserActivity(this, this)
+        val userDataDialog = DataUserActivity(requireContext(), this)
         userDataDialog.show()
     }
 
@@ -116,46 +122,46 @@ class MainActivity : AppCompatActivity(), OnLoginResultListener {
     }
 
     fun onUserDataUpdated(username: String) {
-        runOnUiThread {
+        activity?.runOnUiThread {
             // Actualiza el TextView con los datos obtenidos
-            val txtUser = findViewById<TextView>(R.id.txtUser)
-            txtUser.text = username
+            val txtUser = view?.findViewById<TextView>(R.id.txtUser)
+            txtUser?.text = username
         }
     }
 
     override fun onLoginSuccess() {
         // Separar los procesos en sus respectivos hilos
-        runOnUiThread {
+        activity?.runOnUiThread {
             // Actualizar el TextView con el mensaje de bienvenida
-            val txtWelcome = findViewById<TextView>(R.id.txtWelcome)
-            txtWelcome.text = getString(R.string.message_welcome)
+            val txtWelcome = view?.findViewById<TextView>(R.id.txtWelcome)
+            txtWelcome?.text = getString(R.string.message_welcome)
             obtenerDatosUsuario()
         }
     }
 
     override fun onLoginFailure() {
-        runOnUiThread {
+        activity?.runOnUiThread {
             // Actualizar el TextView con el mensaje de autenticación requerida
-            val txtWelcome = findViewById<TextView>(R.id.txtWelcome)
-            txtWelcome.text = getString(R.string.message_authentication_required)
+            val txtWelcome = view?.findViewById<TextView>(R.id.txtWelcome)
+            txtWelcome?.text = getString(R.string.message_authentication_required)
         }
     }
 
-    override fun onLogout(){
-        // Actualizar el TextView con el mensaje de autenticación requerida
-        val txtWelcome = findViewById<TextView>(R.id.txtWelcome)
-        txtWelcome.text = getString(R.string.message_authentication_required)
-        val txtUser = findViewById<TextView>(R.id.txtUser)
-        txtUser.text = getString(R.string.login_button)
-
+    override fun onLogout() {
+        activity?.runOnUiThread {
+            // Actualizar el TextView con el mensaje de autenticación requerida
+            val txtWelcome = view?.findViewById<TextView>(R.id.txtWelcome)
+            txtWelcome?.text = getString(R.string.message_authentication_required)
+            val txtUser = view?.findViewById<TextView>(R.id.txtUser)
+            txtUser?.text = getString(R.string.login_button)
+        }
     }
 
-    private fun validateLogin(){
+    private fun validateLogin() {
         val currentUser = FirebaseAuth.getInstance().currentUser
 
         if (currentUser != null) {
             onLoginSuccess()
-
         } else {
             onLoginFailure()
         }

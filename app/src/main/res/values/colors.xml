@@ -22,4 +22,10 @@
     <color name="light_green_1">#acdcd4</color>
     <color name="light_green_2">#95cc9c</color>
     <color name="green_1">#4a7455</color>
+
+    <!-- Bottom Navigation-->
+    <color name="green_dark">#062925</color>
+    <color name="green_normal">#044a42</color>
+    <color name="green_light">#3a9188</color>
+    <color name="green_light_2">#b8e1dd</color>
 </resources>

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/light_brown_1"
     android:theme="@style/Theme_login"
-    tools:context=".MainActivity">
+    tools:context=".HomeFragment">
 
     <LinearLayout
         android:id="@id/cvUser"
@@ -54,13 +54,13 @@
     </LinearLayout>
 
 
-        <TextView
-            android:id="@+id/txtWelcome"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/cvUser"
-            android:gravity="center"
-            android:text="@string/message_authentication_required" />
+    <TextView
+        android:id="@+id/txtWelcome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/cvUser"
+        android:gravity="center"
+        android:text="@string/message_authentication_required" />
 
 
     <LinearLayout
@@ -73,81 +73,81 @@
 
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0.9">
-
-        <ImageButton
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:contentDescription="dogs"
-            android:src="@drawable/plus_dog"/>
-        <SearchView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.6"/>
-        <ImageButton
-            android:id="@+id/ibMap"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:contentDescription="map"
-            android:src="@mipmap/ic_map_dog_foreground" />
+            android:layout_weight="0.9">
 
-    </LinearLayout>
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:contentDescription="dogs"
+                android:src="@drawable/plus_dog"/>
+            <SearchView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.6"/>
+            <ImageButton
+                android:id="@+id/ibMap"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:contentDescription="map"
+                android:src="@mipmap/ic_map_dog_foreground" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0.15"
-        android:orientation="vertical">
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/light_brown_2"
-        app:cardCornerRadius="50dp">
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_gravity="center"
-            android:gravity="center"
-            >
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.4"
-                android:contentDescription="dogs"
-                android:text="Nombre"
-                android:gravity="center"
-                />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.4"
-                android:contentDescription="dogs"
-                android:text="Raza"
-                android:gravity="center"
-                />
-            <ImageView
-                android:id="@+id/ibDogs"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="0.6"
-                android:background="@android:color/transparent"
-                android:src="@mipmap/ic_dog_example_round"/>
+            android:layout_weight="0.15"
+            android:orientation="vertical">
 
-         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/light_brown_2"
+                app:cardCornerRadius="50dp">
 
-    </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.4"
+                        android:contentDescription="dogs"
+                        android:text="Nombre"
+                        android:gravity="center"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.4"
+                        android:contentDescription="dogs"
+                        android:text="Raza"
+                        android:gravity="center"
+                        />
+                    <ImageView
+                        android:id="@+id/ibDogs"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.6"
+                        android:background="@android:color/transparent"
+                        android:src="@mipmap/ic_dog_example_round"/>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
 
 
     </LinearLayout>

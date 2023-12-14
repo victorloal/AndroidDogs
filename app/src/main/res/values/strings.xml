@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Dogs</string>
+    <string name="app_name">AndroidDogs</string>
     <string name="title_sing_in">Sing In</string>
     <string name="title_sing_up">Register</string>
     <string name="hint_username">Username</string>
@@ -32,4 +32,6 @@
     <string name="hint_repeat_password">Repeat password</string>
     <string name="password_difer">Passwords do not match</string>
     <string name="your_web_client_id" translatable="false">962455435496-ue92niapvf4a2kmlqht62uijlostaesm.apps.googleusercontent.com</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
 </resources>
