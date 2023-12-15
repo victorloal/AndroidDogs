@@ -16,13 +16,6 @@ class ExplorarFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_explorar, container, false)
-
-        val rvService = view.findViewById<RecyclerView>(R.id.rv_sercivios)
-        val dataList = listOf("Texto 1", "Texto 2", "Texto 3")
-        val adapter = ServiceAdapter(this, dataList)
-        rvService.layoutManager = LinearLayoutManager(requireContext())
-        rvService.adapter = adapter
-
         return view
     }
 
