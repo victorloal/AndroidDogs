@@ -42,10 +42,20 @@ class MainActivity : AppCompatActivity(), OnLoginResultListener {
         val ibUser = findViewById<ImageButton>(R.id.ibUser)
         //
         val userLogin = UserLogin(this,this)
+        // map
+        val ibMap = findViewById<ImageButton>(R.id.ibMap)
+        ibMap.setOnClickListener{
+            val intent = Intent(this,SplashScreen::class.java)
+            startActivity(intent)
+        }
+
+
         validateLogin()
         btInformation.setOnClickListener{
             showDialogInformation()
         }
+
+
         ibUser.setOnClickListener{
             val currentUser = FirebaseAuth.getInstance().currentUser
             if (currentUser != null) {

@@ -96,7 +96,7 @@
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:contentDescription="map"
-            android:src="@mipmap/ic_map_dog_foreground" />
+            android:src="@mipmap/ic_map_dog_round" />
 
     </LinearLayout>
 

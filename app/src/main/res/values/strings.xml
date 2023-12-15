@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="google_map_api_key" templateMergeStrategy="preserve" translatable="false">AIzaSyA6bpj-L6gu40zNb2eK2cx69ysRuPQo8vo</string>
+
     <string name="app_name">AndroidDogs</string>
     <string name="title_sing_in">Sing In</string>
     <string name="title_sing_up">Register</string>

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/light_brown_1"
     android:theme="@style/Theme_login"
-    tools:context=".HomeFragment">
+    tools:context=".MainActivity">
 
     <LinearLayout
         android:id="@id/cvUser"
@@ -96,7 +96,7 @@
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:contentDescription="map"
-                android:src="@mipmap/ic_map_dog_foreground" />
+                android:src="@mipmap/ic_map_dog_round" />
 
         </LinearLayout>
 

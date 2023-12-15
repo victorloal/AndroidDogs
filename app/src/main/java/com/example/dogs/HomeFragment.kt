@@ -46,6 +46,17 @@ class HomeFragment : Fragment(), OnLoginResultListener {
         val ibUser = view.findViewById<ImageButton>(R.id.ibUser)
 
         val userLogin = UserLogin(requireContext(), this)
+
+        //map
+        val ibMap = view.findViewById<ImageButton>(R.id.ibMap)
+        ibMap.setOnClickListener {
+            // Crear una intención para iniciar la actividad SplashScreen
+            val intent = Intent(requireActivity(), Map::class.java)
+            startActivity(intent)
+        }
+
+
+
         validateLogin()
 
         btInformation.setOnClickListener {
