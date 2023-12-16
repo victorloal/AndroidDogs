@@ -64,6 +64,7 @@
 
 
     <LinearLayout
+        android:id="@+id/linear_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
@@ -79,6 +80,7 @@
             android:layout_weight="0.9">
 
             <ImageButton
+                android:id="@+id/ibPet"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -143,9 +145,18 @@
                         android:layout_weight="0.6"
                         android:background="@android:color/transparent"
                         android:src="@mipmap/ic_dog_example_round"/>
-
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewMascotas"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.75"
+                android:clipToPadding="false"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:background="@drawable/background_card_view_menu" />
 
         </LinearLayout>
 

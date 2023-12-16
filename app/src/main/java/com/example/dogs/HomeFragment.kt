@@ -1,13 +1,12 @@
 package com.example.dogs
 
-import android.annotation.SuppressLint
+
+
 import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.service.autofill.UserData
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -15,19 +14,13 @@ import android.view.ViewGroup
 import android.view.Window
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
-import com.google.firebase.analytics.FirebaseAnalytics
-import com.example.dogs.OnLoginResultListener
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 class HomeFragment : Fragment(), OnLoginResultListener {
@@ -44,8 +37,11 @@ class HomeFragment : Fragment(), OnLoginResultListener {
 
         val btInformation = view.findViewById<ImageButton>(R.id.btInformation)
         val ibUser = view.findViewById<ImageButton>(R.id.ibUser)
+        val ibPet = view.findViewById<ImageButton>(R.id.ibPet)
 
         val userLogin = UserLogin(requireContext(), this)
+        val database: FirebaseDatabase = FirebaseDatabase.getInstance()
+        val databaseReference: DatabaseReference = database.reference
 
         //map
         val ibMap = view.findViewById<ImageButton>(R.id.ibMap)
@@ -55,7 +51,9 @@ class HomeFragment : Fragment(), OnLoginResultListener {
             startActivity(intent)
         }
 
-
+        ibPet.setOnClickListener {
+            showDialogPetRegister()
+        }
 
         validateLogin()
 
@@ -104,6 +102,11 @@ class HomeFragment : Fragment(), OnLoginResultListener {
         userDataDialog.show()
     }
 
+    private fun showDialogPetRegister() {
+        val petRegisterDialog = MascotaRegister(requireContext())
+        petRegisterDialog.show()
+    }
+
     private fun obtenerDatosUsuario() {
         val user = FirebaseAuth.getInstance().currentUser
         val dbReference = FirebaseDatabase.getInstance().getReference("User")
@@ -146,6 +149,8 @@ class HomeFragment : Fragment(), OnLoginResultListener {
             // Actualizar el TextView con el mensaje de bienvenida
             val txtWelcome = view?.findViewById<TextView>(R.id.txtWelcome)
             txtWelcome?.text = getString(R.string.message_welcome)
+            val linearlayout = view?.findViewById<LinearLayout>(R.id.linear_layout)
+            linearlayout?.visibility = View.VISIBLE
             obtenerDatosUsuario()
         }
     }
@@ -155,6 +160,8 @@ class HomeFragment : Fragment(), OnLoginResultListener {
             // Actualizar el TextView con el mensaje de autenticación requerida
             val txtWelcome = view?.findViewById<TextView>(R.id.txtWelcome)
             txtWelcome?.text = getString(R.string.message_authentication_required)
+            val linearlayout = view?.findViewById<LinearLayout>(R.id.linear_layout)
+            linearlayout?.visibility = View.GONE
         }
     }
 
@@ -165,6 +172,8 @@ class HomeFragment : Fragment(), OnLoginResultListener {
             txtWelcome?.text = getString(R.string.message_authentication_required)
             val txtUser = view?.findViewById<TextView>(R.id.txtUser)
             txtUser?.text = getString(R.string.login_button)
+            val linearlayout = view?.findViewById<LinearLayout>(R.id.linear_layout)
+            linearlayout?.visibility = View.GONE
         }
     }
 
