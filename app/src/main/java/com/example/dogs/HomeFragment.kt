@@ -29,6 +29,8 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 class HomeFragment : Fragment(), OnLoginResultListener {
 
+    private val mascotasList = mutableListOf<Mascota>()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -75,37 +77,6 @@ class HomeFragment : Fragment(), OnLoginResultListener {
                 showDialogLogin()
                 onLoginFailure()
             }
-        }
-
-        val currentUser = FirebaseAuth.getInstance().currentUser
-        currentUser?.uid?.let { uid ->
-            val dbReference = FirebaseDatabase.getInstance().getReference("User").child(uid).child("Mascota")
-
-            // Escuchar cambios en los datos de mascotas
-            dbReference.addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.exists()) {
-                        val mascotasList = mutableListOf<Mascota>()
-
-                        for (mascotaSnapshot in snapshot.children) {
-                            val nombre = mascotaSnapshot.child("nombre").getValue(String::class.java)
-                            val raza = mascotaSnapshot.child("raza").getValue(String::class.java)
-
-                            if (nombre != null && raza != null) {
-                                mascotasList.add(Mascota(nombre, raza))
-                            }
-                        }
-
-                        // Actualizar los adaptadores con la lista de mascotas
-                        actualizarAdaptadores(mascotasList)
-                    }
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    // Manejar errores de lectura de la base de datos
-                    Log.e("LecturaBD", "Error al leer datos de mascotas: ${error.message}")
-                }
-            })
         }
     }
     data class Mascota(val nombre: String, val raza: String)
@@ -212,6 +183,40 @@ class HomeFragment : Fragment(), OnLoginResultListener {
         }
     }
 
+    private fun obtenerDatosMascota() {
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        currentUser?.uid?.let { uid ->
+            val dbReference = FirebaseDatabase.getInstance().getReference("User").child(uid).child("Mascota")
+
+            // Escuchar cambios en los datos de mascotas
+            dbReference.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()) {
+
+                        mascotasList.clear()
+
+                        for (mascotaSnapshot in snapshot.children) {
+                            val nombre = mascotaSnapshot.child("nombre").getValue(String::class.java)
+                            val raza = mascotaSnapshot.child("raza").getValue(String::class.java)
+
+                            if (nombre != null && raza != null) {
+                                mascotasList.add(Mascota(nombre, raza))
+                            }
+                        }
+
+                        // Actualizar los adaptadores con la lista de mascotas
+                        actualizarAdaptadores(mascotasList)
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    // Manejar errores de lectura de la base de datos
+                    Log.e("LecturaBD", "Error al leer datos de mascotas: ${error.message}")
+                }
+            })
+        }
+    }
+
     private fun actualizarAdaptadores(mascotasList: List<Mascota>) {
         Log.e("DEBUG", "Número de mascotas: ${mascotasList.size}")
         // Separar los procesos en sus respectivos hilos
@@ -226,6 +231,10 @@ class HomeFragment : Fragment(), OnLoginResultListener {
             // Crear adaptadores con la lista de mascotas
             val pet_adapter_n = NombresAdapter(mascotasList.map { Mascota(it.nombre, it.raza) })
             val pet_adapter_r = RazasAdapter(mascotasList.map { Mascota(it.nombre, it.raza) })
+
+            // Notificar a los adaptadores que los datos han cambiado
+            pet_adapter_n.notifyDataSetChanged()
+            pet_adapter_r.notifyDataSetChanged()
 
             // Configurar los adaptadores en los RecyclerView correspondientes
             rc_pets_n?.adapter = pet_adapter_n
@@ -254,6 +263,7 @@ class HomeFragment : Fragment(), OnLoginResultListener {
             val linearlayout = view?.findViewById<LinearLayout>(R.id.linear_layout)
             linearlayout?.visibility = View.VISIBLE
             obtenerDatosUsuario()
+            obtenerDatosMascota()
         }
     }
 
@@ -276,6 +286,7 @@ class HomeFragment : Fragment(), OnLoginResultListener {
             txtUser?.text = getString(R.string.login_button)
             val linearlayout = view?.findViewById<LinearLayout>(R.id.linear_layout)
             linearlayout?.visibility = View.GONE
+            mascotasList.clear()
         }
     }
 
