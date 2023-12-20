@@ -3,9 +3,11 @@ package com.example.dogs
 
 
 import android.app.Dialog
+import android.content.ClipData
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.media.RouteListingPreference
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,6 +19,8 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -72,6 +76,80 @@ class HomeFragment : Fragment(), OnLoginResultListener {
                 onLoginFailure()
             }
         }
+
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        currentUser?.uid?.let { uid ->
+            val dbReference = FirebaseDatabase.getInstance().getReference("User").child(uid).child("Mascota")
+
+            // Escuchar cambios en los datos de mascotas
+            dbReference.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()) {
+                        val mascotasList = mutableListOf<Mascota>()
+
+                        for (mascotaSnapshot in snapshot.children) {
+                            val nombre = mascotaSnapshot.child("nombre").getValue(String::class.java)
+                            val raza = mascotaSnapshot.child("raza").getValue(String::class.java)
+
+                            if (nombre != null && raza != null) {
+                                mascotasList.add(Mascota(nombre, raza))
+                            }
+                        }
+
+                        // Actualizar los adaptadores con la lista de mascotas
+                        actualizarAdaptadores(mascotasList)
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    // Manejar errores de lectura de la base de datos
+                    Log.e("LecturaBD", "Error al leer datos de mascotas: ${error.message}")
+                }
+            })
+        }
+    }
+    data class Mascota(val nombre: String, val raza: String)
+
+    class NombresAdapter(private val mascotas: List<Mascota>) : RecyclerView.Adapter<NombresAdapter.ViewHolder>() {
+
+        inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+            val textView: TextView = itemView.findViewById(R.id.textView)
+        }
+
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.spinner_dropdown_item, parent, false)
+            return ViewHolder(view)
+        }
+
+        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+            val mascota = mascotas[position]
+            holder.textView.text = "${mascota.nombre}"
+        }
+
+        override fun getItemCount(): Int {
+            return mascotas.size
+        }
+    }
+
+    class RazasAdapter(private val mascotas: List<Mascota>) : RecyclerView.Adapter<RazasAdapter.ViewHolder>() {
+
+        inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+            val textView: TextView = itemView.findViewById(R.id.textView)
+        }
+
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.spinner_dropdown_item, parent, false)
+            return ViewHolder(view)
+        }
+
+        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+            val mascota = mascotas[position]
+            holder.textView.text = "${mascota.raza}"
+        }
+
+        override fun getItemCount(): Int {
+            return mascotas.size
+        }
     }
 
     private fun showDialogLogin() {
@@ -110,7 +188,6 @@ class HomeFragment : Fragment(), OnLoginResultListener {
     private fun obtenerDatosUsuario() {
         val user = FirebaseAuth.getInstance().currentUser
         val dbReference = FirebaseDatabase.getInstance().getReference("User")
-
         user?.uid?.let { uid ->
             val userDB = dbReference.child(uid)
 
@@ -132,6 +209,31 @@ class HomeFragment : Fragment(), OnLoginResultListener {
                     Log.e("LecturaBD", "Error al leer datos: ${error.message}")
                 }
             })
+        }
+    }
+
+    private fun actualizarAdaptadores(mascotasList: List<Mascota>) {
+        Log.e("DEBUG", "Número de mascotas: ${mascotasList.size}")
+        // Separar los procesos en sus respectivos hilos
+        activity?.runOnUiThread {
+            // Obtener referencias a los RecyclerView
+            val rc_pets_n = view?.findViewById<RecyclerView>(R.id.recyclerViewPetName)
+            rc_pets_n?.layoutManager = LinearLayoutManager(requireContext())
+
+            val rc_pets_r = view?.findViewById<RecyclerView>(R.id.recyclerViewPetBreed)
+            rc_pets_r?.layoutManager = LinearLayoutManager(requireContext())
+
+            // Crear adaptadores con la lista de mascotas
+            val pet_adapter_n = NombresAdapter(mascotasList.map { Mascota(it.nombre, it.raza) })
+            val pet_adapter_r = RazasAdapter(mascotasList.map { Mascota(it.nombre, it.raza) })
+
+            // Configurar los adaptadores en los RecyclerView correspondientes
+            rc_pets_n?.adapter = pet_adapter_n
+            rc_pets_r?.adapter = pet_adapter_r
+
+            // Notificar a los adaptadores que los datos han cambiado
+            pet_adapter_n.notifyDataSetChanged()
+            pet_adapter_r.notifyDataSetChanged()
         }
     }
 
