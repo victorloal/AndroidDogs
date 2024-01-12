@@ -21,6 +21,7 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
+        /*
         // Configurar el título y el ícono en la ActionBar
         supportActionBar?.apply {
             // Mostrar el ícono del logo a la izquierda
@@ -33,7 +34,7 @@ class HomeActivity : AppCompatActivity() {
         // Agregar un ícono de configuración a la derecha de la ActionBar
         //supportActionBar?.setDisplayShowCustomEnabled(true)
         //supportActionBar?.setCustomView(R.layout.action_bar_settings_icon)
-
+        */
         val navigation: BottomNavigationView = findViewById(R.id.bottom_navigation)
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
@@ -47,10 +48,10 @@ class HomeActivity : AppCompatActivity() {
                 loadFragment(homeFragment)
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.explorarFragment -> {
+            /*R.id.explorarFragment -> {
                 loadFragment(explorarFragment)
                 return@OnNavigationItemSelectedListener true
-            }
+            }*/
             R.id.solicitudesFragment -> {
                 loadFragment(solicitudesFragment)
                 return@OnNavigationItemSelectedListener true

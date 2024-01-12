@@ -4,28 +4,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SolicitudesFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/light_brown_1">
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/twitter" />
+        android:layout_height="150dp"
+        android:background="@mipmap/banner_fragment_solicitudes_foreground"
+        />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_gravity="center"
-        android:background="@color/green_light_2">
+        android:background="@drawable/backgroun_linearlayour"
+        android:paddingHorizontal="5dp"
+        android:paddingTop="5dp">
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/twitter"
-                android:layout_gravity="center"/>
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/icon_solicitud"
+                android:layout_gravity="center" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -38,9 +42,9 @@
             android:orientation="vertical"
             android:layout_marginHorizontal="5dp">
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/twitter"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/icon_getservice"
                 android:layout_gravity="center"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -54,9 +58,9 @@
             android:orientation="vertical"
             android:layout_marginHorizontal="5dp">
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/twitter"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/icon_petpound"
                 android:layout_gravity="center"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -69,9 +73,9 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/twitter"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/icon_help"
                 android:layout_gravity="center"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -82,9 +86,10 @@
     </LinearLayout>
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/twitter"
+        android:layout_marginVertical="15dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:src="@drawable/icon_petpound"
         android:layout_gravity="center" />
     <TextView
         android:layout_width="wrap_content"

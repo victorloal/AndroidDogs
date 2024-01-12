@@ -2,22 +2,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/homeFragment"
-        android:icon="@android:drawable/ic_input_add"
+        android:icon="@drawable/icon_home"
         android:title="Home" />
-    <item
+<!--    <item
         android:id="@+id/explorarFragment"
         android:icon="@android:drawable/ic_delete"
-        android:title="Explorar" />
+        android:title="Explorar" /> -->
     <item
         android:id="@+id/solicitudesFragment"
-        android:icon="@android:drawable/ic_lock_idle_alarm"
+        android:icon="@drawable/icon_solicitud"
         android:title="Solicitudes" />
     <item
         android:id="@+id/trabajosFragment"
-        android:icon="@android:drawable/ic_lock_idle_alarm"
+        android:icon="@drawable/icon_work"
         android:title="Trabajos" />
     <item
         android:id="@+id/perfilFragment"
-        android:icon="@android:drawable/ic_lock_idle_alarm"
+        android:icon="@drawable/icon_perfil"
         android:title="Perfil" />
 </menu>

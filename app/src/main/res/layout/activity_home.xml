@@ -7,6 +7,11 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
+    <View
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/green_dark"/>
     <FrameLayout
         android:id="@+id/frame_container"
         android:layout_width="match_parent"
