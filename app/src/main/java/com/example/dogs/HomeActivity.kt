@@ -35,6 +35,7 @@ class HomeActivity : AppCompatActivity() {
         //supportActionBar?.setDisplayShowCustomEnabled(true)
         //supportActionBar?.setCustomView(R.layout.action_bar_settings_icon)
         */
+
         val navigation: BottomNavigationView = findViewById(R.id.bottom_navigation)
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
@@ -77,6 +78,8 @@ class HomeActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.bottom_navigation, menu)
         return true
     }
+
+/*
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
@@ -104,5 +107,6 @@ class HomeActivity : AppCompatActivity() {
         val intent = Intent(this, SettingsActivity::class.java)
         startActivity(intent)
     }
+*/
 
 }

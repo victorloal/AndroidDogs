@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Dogs" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.Dogs" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/brown_1</item>
         <item name="colorPrimaryVariant">@color/brown_2</item>
@@ -12,6 +12,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+
     </style>
 
     <style name="Theme.Dogs.SplashScreen" parent="Theme.MaterialComponents.DayNight.NoActionBar">
@@ -31,7 +32,7 @@
         <item name="android:textSize">30dp</item>
     </style>
 
-    <style name="BottomNavigation">
+    <style name="BottomNavigation" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:background">@color/green_dark</item>
         <item name="itemIconTint">@color/green_light_2</item>
         <item name="itemTextColor">@color/green_light_2</item>
