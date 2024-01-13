@@ -1,10 +1,16 @@
 package com.example.dogs
 
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.Window
+import android.widget.Button
+import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -35,6 +41,11 @@ class HomeActivity : AppCompatActivity() {
         //supportActionBar?.setDisplayShowCustomEnabled(true)
         //supportActionBar?.setCustomView(R.layout.action_bar_settings_icon)
         */
+
+        val btInformation = findViewById<ImageButton>(R.id.btInformation)
+        btInformation.setOnClickListener{
+            showDialogInformation()
+        }
 
         val navigation: BottomNavigationView = findViewById(R.id.bottom_navigation)
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
@@ -77,6 +88,24 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.bottom_navigation, menu)
         return true
+    }
+
+    private fun showDialogInformation() {
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(true)
+        dialog.setContentView(R.layout.information)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        val width = resources.displayMetrics.widthPixels
+        val height = resources.displayMetrics.heightPixels
+        dialog.window?.setLayout((width * 1).toInt(), (height * 0.9).toInt())
+
+        val btBack = dialog.findViewById<Button>(R.id.btBack)
+
+        btBack.setOnClickListener {
+            dialog.dismiss()
+        }
+        dialog.show()
     }
 
 /*

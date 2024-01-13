@@ -49,7 +49,6 @@ class MainActivity : AppCompatActivity(), OnLoginResultListener {
             startActivity(intent)
         }
 
-
         validateLogin()
         btInformation.setOnClickListener{
             showDialogInformation()
