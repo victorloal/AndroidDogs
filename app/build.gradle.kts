@@ -35,6 +35,7 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
 }
 
 dependencies {
@@ -53,6 +54,8 @@ dependencies {
     implementation("com.google.firebase:firebase-database:20.3.0")
     // maps
     implementation("com.google.android.gms:play-services-maps:18.2.0")
+    //places
+    implementation("com.google.android.libraries.places:places:3.3.0")
     //localizacion
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation("com.google.android.gms:play-services-location:21.0.1")

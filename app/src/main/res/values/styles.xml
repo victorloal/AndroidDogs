@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Theme_Text_Slider">
+        <item name="android:textColor">@color/brown_3</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:autoSizeTextType" tools:targetApi="o">uniform</item>
+        <item name="android:autoSizeMinTextSize" tools:targetApi="o">12dp</item> <!-- Tamaño mínimo del texto -->
+        <item name="android:autoSizeMaxTextSize" tools:targetApi="o">40dp</item> <!-- Tamaño máximo del texto -->
+    </style>
+    <style name="Theme_Text_Slider2">
+        <item name="android:textColor">@color/green_1</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:autoSizeTextType" tools:targetApi="o">uniform</item>
+        <item name="android:autoSizeMinTextSize" tools:targetApi="o">12dp</item> <!-- Tamaño mínimo del texto -->
+        <item name="android:autoSizeMaxTextSize" tools:targetApi="o">40dp</item> <!-- Tamaño máximo del texto -->
+    </style>
     <style name="Theme_Text_Title_1">
         <item name="android:textColor">@color/brown_1</item>
         <item name="android:textSize">30dp</item>
