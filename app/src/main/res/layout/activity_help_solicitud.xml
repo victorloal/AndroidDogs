@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HelpSolicitudActivity">
+
+    <LinearLayout
+        android:id="@+id/linearlayout1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:gravity="top|center"
+        app:layout_constraintBottom_toTopOf="@+id/linearlayout2"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ACTIVITY DE AYUDA PARA FRAGMENT SOLICITUD"
+            />
+
+        <TextView
+            android:id="@+id/textPasos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Paso 1: Sigue las instrucciones"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp" />
+
+        <TextView
+            android:id="@+id/textInstrucciones"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Aquí van las instrucciones del paso 1"
+            android:layout_below="@id/textPasos"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearlayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/linearlayout1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="10dp">
+        <Button
+            android:id="@+id/btnAnterior"
+            android:layout_width="0dp"
+            android:layout_weight="50"
+            android:layout_height="wrap_content"
+            android:text="Anterior"
+            android:textColor="@color/white"
+            android:layout_below="@id/textInstrucciones"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:id="@+id/btnSiguiente"
+            android:layout_width="0dp"
+            android:layout_weight="50"
+            android:layout_height="wrap_content"
+            android:text="Siguiente"
+            android:textColor="@color/white"
+            android:layout_below="@id/textInstrucciones"
+            android:layout_alignParentEnd="true" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

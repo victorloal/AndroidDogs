@@ -7,12 +7,12 @@
     android:orientation="vertical"
     android:background="@color/light_brown_1">
 
-    <ImageView
+<!--    <ImageView
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:background="@mipmap/banner_fragment_solicitudes_foreground"
         />
-
+-->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,7 +20,8 @@
         android:layout_gravity="center"
         android:background="@drawable/backgroun_linearlayour"
         android:paddingHorizontal="5dp"
-        android:paddingTop="5dp">
+        android:paddingTop="5dp"
+        android:layout_marginTop="15dp">
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -69,6 +70,7 @@
                 android:layout_gravity="center" />
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/help_solicitudesfragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
