@@ -1,0 +1,37 @@
+<!-- res/layout/item_layout.xml -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="18sp"
+        tools:text="PRUEBA"
+        />
+
+    <Button
+        android:id="@+id/detailButton"
+        android:textColor="@color/white"
+        android:backgroundTint="#008F06"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Detalles"
+        android:onClick="onDetailButtonClick"
+        android:layout_marginEnd="5dp"/>
+
+    <ImageView
+        android:id="@+id/deleteButton"
+        android:textColor="@color/white"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/icon_button_delete"
+        android:onClick="onDeleteButtonClick"/>
+</LinearLayout>

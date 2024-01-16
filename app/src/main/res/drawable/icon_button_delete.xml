@@ -1,0 +1,14 @@
+<!-- res/drawable/rounded_shape_with_icon.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Fondo redondeado -->
+    <item android:drawable="@drawable/backgroud_button_delete"/>
+    <!-- Icono en la capa superior, ajusta el padding según sea necesario -->
+    <item
+        android:drawable="@drawable/icon_delete"
+        android:gravity="center"
+        android:left="-5dp"
+        android:right="-5dp"
+        android:top="-5dp"
+        android:bottom="-5dp"/>
+
+</layer-list>

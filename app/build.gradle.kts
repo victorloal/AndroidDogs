@@ -59,9 +59,8 @@ dependencies {
     //localizacion
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation("com.google.android.gms:play-services-location:21.0.1")
-
-
-
+    //Diseño
+    implementation("androidx.recyclerview:recyclerview:1.2.1")
     implementation("com.google.code.gson:gson:2.8.7")
     implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
     implementation("androidx.navigation:navigation-ui-ktx:2.3.5")
