@@ -31,7 +31,7 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".Map"
+            android:name=".maps.Map"
             android:exported="false" />
         <activity
             android:name=".SettingsActivity"
@@ -40,16 +40,16 @@
             android:name=".HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".DataUserActivity"
+            android:name=".user.DataUserActivity"
             android:exported="false" />
         <activity
-            android:name=".UserLogin"
+            android:name=".user.UserLogin"
             android:exported="false" />
         <activity
-            android:name=".UserRegister"
+            android:name=".user.UserRegister"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".home.MainActivity"
             android:exported="false" />
         <activity
             android:name=".SplashScreen"
