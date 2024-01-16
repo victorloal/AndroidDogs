@@ -1,183 +1,199 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_brown_1"
     android:theme="@style/Theme_login"
-    tools:context=".MainActivity">
+    android:orientation="vertical"
+    tools:context=".home.HomeFragment">
 
     <LinearLayout
-        android:id="@id/cvUser"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/background_card_view_main"
-        android:orientation="horizontal"
-        android:padding="20dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_margin="10dp"
+        android:background="@drawable/background_image_view_slider"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageButton
-            android:id="@+id/ibUser"
+        <ViewFlipper
+            android:id="@+id/viewFlipper"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.1"
+            android:autoStart="true"
+            android:flipInterval="50000"
+            android:inAnimation="@android:anim/slide_in_left"
+            android:outAnimation="@android:anim/slide_out_right">
+
+            <include layout="@layout/social_slider" />
+
+            <include layout="@layout/slider_veterinaria" />
+
+            <include layout="@layout/slider_paseos" />
+
+
+        </ViewFlipper>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:contentDescription="twitter"
-            android:src="@drawable/round_person_24"
-            app:tint="@color/green_1" />
-
-        <TextView
-            android:id="@+id/txtUser"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.4"
-            android:background="@android:color/transparent"
             android:gravity="center"
-            android:src="@drawable/round_person_24"
-            android:text="@string/login_button" />
-
-
-        <ImageButton
-            android:id="@+id/btInformation"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="top|end"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:contentDescription="twitter"
-            android:src="@drawable/ic_info"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/green_1" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewFlipper">
+
+            <ImageButton
+                android:id="@+id/button1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="50dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/baseline_keyboard_arrow_left_24" />
+
+            <ImageButton
+                android:id="@+id/button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="10dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/baseline_keyboard_arrow_right_24" />
+        </LinearLayout>
+
 
     </LinearLayout>
 
-
-    <TextView
-        android:id="@+id/txtWelcome"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/cvUser"
-        android:gravity="center"
-        android:text="@string/message_authentication_required" />
-
-
     <LinearLayout
-        android:id="@+id/linear_layout"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:background="@drawable/background_card_view_menu"
-        app:layout_constraintTop_toBottomOf="@+id/txtWelcome">
-
-
-
+        android:layout_height="match_parent"
+        android:layout_weight="1.5"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.9">
-
-            <ImageButton
-                android:id="@+id/ibPet"
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <LinearLayout
+                android:id="@+id/linearPaseo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:contentDescription="dogs"
-                android:src="@drawable/plus_dog"/>
-            <SearchView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.6"/>
-            <ImageButton
-                android:id="@+id/ibMap"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:contentDescription="map"
-                android:src="@mipmap/ic_map_dog_round" />
+                android:layout_weight="0.5"
+                android:orientation="vertical"
+                android:background="@drawable/background_card_view_2"
+                android:layout_margin="10dp">
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.15"
-            android:orientation="vertical">
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/light_brown_2"
-                app:cardCornerRadius="50dp">
-
-                <LinearLayout
+                <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    >
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.4"
-                        android:contentDescription="dogs"
-                        android:text="Nombre"
-                        android:gravity="center"
-                        />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.4"
-                        android:contentDescription="dogs"
-                        android:text="Raza"
-                        android:gravity="center"
-                        />
-                    <ImageView
-                        android:id="@+id/ibDogs"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.6"
-                        android:background="@android:color/transparent"
-                        android:src="@mipmap/ic_dog_example_round"/>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
+                    android:layout_weight="0.4"
+                    android:src="@drawable/ic_dogs_walking_foreground"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerViewPetName"
-                    android:layout_width="0dp"
+                <TextView
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:clipToPadding="false"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="8dp" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerViewPetBreed"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:clipToPadding="false"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="8dp" />
+                    android:text="Paseo"
+                    style="@style/Theme_Text_Slider"
+                    android:gravity="center"/>
 
 
             </LinearLayout>
+            <LinearLayout
+                android:id="@+id/linearveterinaria"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:background="@drawable/background_card_view_3"
+                android:layout_margin="10dp">
 
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:src="@drawable/ic_clinic_foreground" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Veterinario"
+                    style="@style/Theme_Text_Slider2"
+                    android:gravity="center|start"/>
+
+
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <LinearLayout
+                android:id="@+id/linearMascotas"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:background="@drawable/background_card_view_4"
+                android:layout_margin="10dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_pets_foreground"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Mis mascotas"
+                    style="@style/Theme_Text_Slider2"
+                    android:gravity="center|start"/>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/linearParques"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:orientation="vertical"
+                android:background="@drawable/background_card_view_1"
+                android:layout_margin="10dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.4"
+                    android:src="@drawable/ic_park_foreground" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Parques"
+                    style="@style/Theme_Text_Slider"
+                    android:gravity="center"/>
+            </LinearLayout>
         </LinearLayout>
 
 
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
 
+
+</LinearLayout>
