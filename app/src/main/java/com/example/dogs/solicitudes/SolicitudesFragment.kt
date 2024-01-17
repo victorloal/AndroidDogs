@@ -130,7 +130,7 @@ class SolicitudesFragment : Fragment() {
         fun onItemDismiss(position: Int)
     }
 
-    data class Solicitud(val id: String, val peticion: String, val nombre: String, val estado: Boolean)
+    data class Solicitud(val id: String, val peticion: String, val nombre: String, val estado: Boolean, val paseador: String)
 
     class SolicitudesAdapter(private val solicitudes: List<Solicitud>) :
         RecyclerView.Adapter<SolicitudesAdapter.ViewHolder>(), ItemTouchHelperAdapter {
@@ -138,6 +138,7 @@ class SolicitudesFragment : Fragment() {
         inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             val textViewTitle: TextView = itemView.findViewById(R.id.textViewTitle)
             val textViewDescription: TextView = itemView.findViewById(R.id.textViewDescription)
+            val textViewPaseador: TextView = itemView.findViewById(R.id.textViewPaseador)
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -150,6 +151,7 @@ class SolicitudesFragment : Fragment() {
             if (solicitud.estado) {
                 holder.textViewTitle.text = solicitud.nombre
                 holder.textViewDescription.text = solicitud.peticion
+                holder.textViewPaseador.text = solicitud.paseador
             } else {
                 // Si el estado es false, puedes ocultar o manejar de otra manera las solicitudes con estado false
                 holder.itemView.visibility = View.GONE
@@ -204,9 +206,10 @@ class SolicitudesFragment : Fragment() {
                         for (solicitudSnapshot in snapshot.children) {
                             val nombre = solicitudSnapshot.child("nombre").getValue(String::class.java)
                             val peticion = solicitudSnapshot.child("peticion").getValue(String::class.java)
+                            val paseador = solicitudSnapshot.child("paseador").getValue(String::class.java)
 
-                            if (nombre != null && peticion != null) {
-                                solicitudesList.add(Solicitud(solicitudSnapshot.key!!, peticion, nombre, true))
+                            if (nombre != null && peticion != null && paseador != null) {
+                                solicitudesList.add(Solicitud(solicitudSnapshot.key!!, peticion, nombre, true, paseador))
                             }
                         }
 
@@ -232,7 +235,7 @@ class SolicitudesFragment : Fragment() {
             rvSolicitud?.layoutManager = LinearLayoutManager(requireContext())
 
             // Crear adaptadores con la lista de solicitudes
-            val solicitud_adapter = SolicitudesAdapter(solicitudesList.map { Solicitud(it.id, it.peticion, it.nombre, it.estado) })
+            val solicitud_adapter = SolicitudesAdapter(solicitudesList.map { Solicitud(it.id, it.peticion, it.nombre, it.estado, it.paseador) })
 
             // Adjuntar ItemTouchHelper al RecyclerView
             val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
@@ -280,6 +283,7 @@ class SolicitudesFragment : Fragment() {
                 "peticion" to peticion,
                 "nombre" to nombre,
                 "estado" to true,
+                "paseador" to "Sin paseador"
             )
             userDB.child("Solicitud").child(solicitudId!!).setValue(nuevaSolicitud)
 
@@ -293,6 +297,7 @@ class SolicitudesFragment : Fragment() {
         inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             val textViewTitle: TextView = itemView.findViewById(R.id.textViewTitle)
             val textViewDescription: TextView = itemView.findViewById(R.id.textViewDescription)
+            val textViewPaseador: TextView = itemView.findViewById(R.id.textViewPaseador)
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -306,6 +311,7 @@ class SolicitudesFragment : Fragment() {
             if (!solicitud.estado) {
                 holder.textViewTitle.text = solicitud.nombre
                 holder.textViewDescription.text = solicitud.peticion
+                holder.textViewPaseador.text = solicitud.paseador
             } else {
                 // Si el estado es true, puedes ocultar o manejar de otra manera las solicitudes con estado true
                 holder.itemView.visibility = View.GONE
@@ -332,9 +338,10 @@ class SolicitudesFragment : Fragment() {
                         for (solicitudSnapshot in snapshot.children) {
                             val nombre = solicitudSnapshot.child("nombre").getValue(String::class.java)
                             val peticion = solicitudSnapshot.child("peticion").getValue(String::class.java)
+                            val paseador = solicitudSnapshot.child("paseador").getValue(String::class.java)
 
-                            if (nombre != null && peticion != null) {
-                                solicitudesAcceptList.add(Solicitud(solicitudSnapshot.key!!, peticion, nombre, false))
+                            if (nombre != null && peticion != null && paseador != null) {
+                                solicitudesAcceptList.add(Solicitud(solicitudSnapshot.key!!, peticion, nombre, false, paseador))
                             }
                         }
 
@@ -360,7 +367,7 @@ class SolicitudesFragment : Fragment() {
             rvSAceptadas?.layoutManager = LinearLayoutManager(requireContext())
 
             // Crear adaptadores con la lista de solicitudes aceptadas
-            val solicitudAccept_adapter = SolicitudesAcceptAdapter(solicitudesAcceptList.map { Solicitud(it.id, it.peticion, it.nombre, it.estado) })
+            val solicitudAccept_adapter = SolicitudesAcceptAdapter(solicitudesAcceptList.map { Solicitud(it.id, it.peticion, it.nombre, it.estado, it.paseador) })
 
             // Configurar los adaptadores en el RecyclerView correspondiente
             rvSAceptadas?.adapter = solicitudAccept_adapter

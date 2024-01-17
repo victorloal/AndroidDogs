@@ -47,19 +47,39 @@ class TrabajosFragment : Fragment() {
     }
 
     private fun onAcceptWorkClick(oferta: Oferta) {
-        // Aquí implementas la lógica para actualizar la solicitud y crear el nodo "Trabajo"
-        // para el usuario autenticado
-        // 1. Actualizar la solicitud a false
-        // 2. Crear el nodo "Trabajo" con la información de la solicitud en la base de datos
-        // 3. Actualizar el RecyclerView de trabajos aceptados (rvOAceptadas) con la nueva información
-
-        // Ejemplo:
         val currentUser = FirebaseAuth.getInstance().currentUser
+
         if (currentUser != null) {
-            actualizarSolicitud(oferta.userId, oferta.id)
-            crearNodoTrabajo(oferta, currentUser.uid)
-            obtenerTrabajosAceptados()
+            // Obtener el nombre del usuario actual desde la base de datos
+            obtenerNombreUsuarioActual(currentUser.uid) { currentUserName ->
+                if (currentUserName != null) {
+                    // Actualizar la solicitud con el nombre del aceptador
+                    actualizarSolicitud(oferta.userId, oferta.id, currentUserName)
+
+                    // Crear el nodo "Trabajo" con la información de la solicitud en la base de datos
+                    crearNodoTrabajo(oferta, currentUser.uid)
+
+                    // Actualizar el RecyclerView de trabajos aceptados con la nueva información
+                    obtenerTrabajosAceptados()
+                } else {
+                    Log.e("NombreUsuario", "No se pudo obtener el nombre del usuario actual")
+                }
+            }
         }
+    }
+
+    private fun obtenerNombreUsuarioActual(userId: String, callback: (String?) -> Unit) {
+        val userRef = dbReference.child(userId)
+        userRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val fullName = snapshot.child("full_name").getValue(String::class.java)
+                callback(fullName)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                callback(null)
+            }
+        })
     }
 
     interface ItemTouchHelperAdapter {
@@ -67,15 +87,16 @@ class TrabajosFragment : Fragment() {
         fun onItemDismiss(position: Int)
     }
 
-    data class Oferta(val id: String, val peticion: String, val nombre: String, val estado: Boolean, val userId: String)
+    data class Oferta(val id: String, val peticion: String, val nombre: String, val estado: Boolean, val userId: String, val solicitante: String)
 
-    data class Trabajo(val id: String, val peticion: String, val nombre: String, val userId: String)
+    data class Trabajo(val id: String, val peticion: String, val nombre: String, val userId: String, val paseador: String)
     class OfertasAdapter(
         private val ofertas: List<Oferta>,
         private val onItemClick: (Oferta) -> Unit
     ) : RecyclerView.Adapter<OfertasAdapter.ViewHolder>() {
 
         inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+            val textViewSolicitante: TextView = itemView.findViewById(R.id.textViewSolicitante)
             val textViewTitle: TextView = itemView.findViewById(R.id.textViewTitle)
             val textViewDescription: TextView = itemView.findViewById(R.id.textViewDescription)
             val btnAcceptWork: ImageView = itemView.findViewById(R.id.btnAcceptWork)
@@ -90,6 +111,7 @@ class TrabajosFragment : Fragment() {
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             val oferta = ofertas[position]
             if (oferta.estado) {
+                holder.textViewSolicitante.text = oferta.solicitante
                 holder.textViewTitle.text = oferta.nombre
                 holder.textViewDescription.text = oferta.peticion
 
@@ -128,13 +150,14 @@ class TrabajosFragment : Fragment() {
 
                             for (solicitudDataSnapshot in solicitudSnapshot.children) {
                                 val solicitudId = solicitudDataSnapshot.key
+                                val solicitante = userSnapshot.child("full_name").getValue(String::class.java)
                                 val nombre = solicitudDataSnapshot.child("nombre").getValue(String::class.java)
                                 val peticion = solicitudDataSnapshot.child("peticion").getValue(String::class.java)
                                 val estado = solicitudDataSnapshot.child("estado").getValue(Boolean::class.java)
 
                                 // Verifica que el estado sea true
-                                if (solicitudId != null && nombre != null && peticion != null && estado == true) {
-                                    ofertasList.add(Oferta(solicitudId, peticion, nombre, true, userId))
+                                if (solicitudId != null && nombre != null && peticion != null && estado == true && solicitante != null) {
+                                    ofertasList.add(Oferta(solicitudId, peticion, nombre, true, userId, solicitante))
                                 }
                             }
                         }
@@ -157,7 +180,7 @@ class TrabajosFragment : Fragment() {
         rvOfertas?.layoutManager = LinearLayoutManager(requireContext())
 
         val ofertas_adapter = OfertasAdapter(ofertasList.map {
-            Oferta(it.id, it.peticion, it.nombre, it.estado, it.userId)
+            Oferta(it.id, it.peticion, it.nombre, it.estado, it.userId, it.solicitante)
         }) { oferta ->
             // Manejar el clic en el botón
             onAcceptWorkClick(oferta)
@@ -173,6 +196,7 @@ class TrabajosFragment : Fragment() {
         inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             val textViewTitle: TextView = itemView.findViewById(R.id.textViewTitle)
             val textViewDescription: TextView = itemView.findViewById(R.id.textViewDescription)
+            val textViewPaseador: TextView = itemView.findViewById(R.id.textViewPaseador)
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -185,6 +209,7 @@ class TrabajosFragment : Fragment() {
             val trabajo = trabajosAceptados[position]
             holder.textViewTitle.text = trabajo.nombre
             holder.textViewDescription.text = trabajo.peticion
+            holder.textViewPaseador.text = trabajo.paseador
         }
 
         override fun getItemCount(): Int {
@@ -192,9 +217,10 @@ class TrabajosFragment : Fragment() {
         }
     }
 
-    private fun actualizarSolicitud(userId: String, solicitudId: String) {
-        // Actualizar el estado de la solicitud a false en la base de datos
+    private fun actualizarSolicitud(userId: String, solicitudId: String, nombreAceptador: String) {
+        // Actualizar el nombre del aceptador y el estado en la solicitud en la base de datos
         val solicitudRef = dbReference.child(userId).child("Solicitud").child(solicitudId)
+        solicitudRef.child("paseador").setValue(nombreAceptador)
         solicitudRef.child("estado").setValue(false)
     }
 
@@ -205,7 +231,8 @@ class TrabajosFragment : Fragment() {
             "id" to trabajoRef.key,
             "nombre" to oferta.nombre,
             "peticion" to oferta.peticion,
-            "userId" to oferta.userId
+            "userId" to oferta.userId,
+            "paseador" to "Tu"
         )
         trabajoRef.setValue(trabajo)
     }
@@ -224,9 +251,10 @@ class TrabajosFragment : Fragment() {
                             val trabajoId = trabajoSnapshot.key
                             val nombre = trabajoSnapshot.child("nombre").getValue(String::class.java)
                             val peticion = trabajoSnapshot.child("peticion").getValue(String::class.java)
+                            val paseador = trabajoSnapshot.child("paseador").getValue(String::class.java)
 
-                            if (trabajoId != null && nombre != null && peticion != null) {
-                                trabajosAceptadosList.add(Trabajo(trabajoId, peticion, nombre, currentUser.uid))
+                            if (trabajoId != null && nombre != null && peticion != null && paseador != null) {
+                                trabajosAceptadosList.add(Trabajo(trabajoId, peticion, nombre, currentUser.uid, paseador))
                             }
                         }
 
@@ -258,6 +286,7 @@ class TrabajosFragment : Fragment() {
                     it.peticion,
                     it.nombre,
                     it.userId,
+                    it.paseador
                 )
             })
 
