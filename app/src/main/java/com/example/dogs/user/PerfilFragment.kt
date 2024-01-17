@@ -16,6 +16,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dogs.R
@@ -26,6 +27,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import java.util.Collections
 
 class PerfilFragment : Fragment(), OnLoginResultListener{
 
@@ -81,9 +83,15 @@ class PerfilFragment : Fragment(), OnLoginResultListener{
             }
         }
     }
-    data class Mascota(val nombre: String, val raza: String)
+    data class Mascota(val id: String, val nombre: String, val raza: String)
 
-    class NombresAdapter(private val mascotas: List<Mascota>) : RecyclerView.Adapter<NombresAdapter.ViewHolder>() {
+    interface ItemTouchHelperAdapter {
+        fun onItemMove(fromPosition: Int, toPosition: Int)
+        fun onItemDismiss(position: Int)
+    }
+
+    class NombresAdapter(private val mascotas: List<Mascota>) :
+        RecyclerView.Adapter<NombresAdapter.ViewHolder>(), ItemTouchHelperAdapter {
 
         inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             val textView: TextView = itemView.findViewById(R.id.textView)
@@ -102,8 +110,35 @@ class PerfilFragment : Fragment(), OnLoginResultListener{
         override fun getItemCount(): Int {
             return mascotas.size
         }
+
+        override fun onItemMove(fromPosition: Int, toPosition: Int) {
+            // Puedes implementar lógica para cambiar el orden de los elementos si es necesario
+            Collections.swap(mascotas, fromPosition, toPosition)
+            notifyItemMoved(fromPosition, toPosition)
+        }
+
+        override fun onItemDismiss(position: Int) {
+            val mascota = mascotas[position]
+
+            // Elimina la mascota de Firebase usando la clave única
+            eliminarMascotaEnFirebase(mascota.id)
+
+            // Elimina la mascota de la lista local y notifica al adaptador
+            notifyItemRemoved(position)
+        }
+
+        fun eliminarMascotaEnFirebase(mascotaId: String) {
+            val currentUser = FirebaseAuth.getInstance().currentUser
+            currentUser?.uid?.let { uid ->
+                val dbReference = FirebaseDatabase.getInstance().getReference("User").child(uid).child("Mascota")
+
+                // Elimina la mascota de Firebase utilizando su clave única
+                dbReference.child(mascotaId).removeValue()
+            }
+        }
     }
-    class RazasAdapter(private val mascotas: List<Mascota>) : RecyclerView.Adapter<RazasAdapter.ViewHolder>() {
+    class RazasAdapter(private val mascotas: List<Mascota>) :
+        RecyclerView.Adapter<RazasAdapter.ViewHolder>(), ItemTouchHelperAdapter {
 
         inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             val textView: TextView = itemView.findViewById(R.id.textView)
@@ -121,6 +156,32 @@ class PerfilFragment : Fragment(), OnLoginResultListener{
 
         override fun getItemCount(): Int {
             return mascotas.size
+        }
+
+        override fun onItemMove(fromPosition: Int, toPosition: Int) {
+            // Puedes implementar lógica para cambiar el orden de los elementos si es necesario
+            Collections.swap(mascotas, fromPosition, toPosition)
+            notifyItemMoved(fromPosition, toPosition)
+        }
+
+        override fun onItemDismiss(position: Int) {
+            val mascota = mascotas[position]
+
+            // Elimina la mascota de Firebase usando la clave única
+            eliminarMascotaEnFirebase(mascota.id)
+
+            // Elimina la mascota de la lista local y notifica al adaptador
+            notifyItemRemoved(position)
+        }
+
+        fun eliminarMascotaEnFirebase(mascotaId: String) {
+            val currentUser = FirebaseAuth.getInstance().currentUser
+            currentUser?.uid?.let { uid ->
+                val dbReference = FirebaseDatabase.getInstance().getReference("User").child(uid).child("Mascota")
+
+                // Elimina la mascota de Firebase utilizando su clave única
+                dbReference.child(mascotaId).removeValue()
+            }
         }
     }
     private fun showDialogLogin() {
@@ -195,7 +256,7 @@ class PerfilFragment : Fragment(), OnLoginResultListener{
                             val raza = mascotaSnapshot.child("raza").getValue(String::class.java)
 
                             if (nombre != null && raza != null) {
-                                mascotasList.add(Mascota(nombre, raza))
+                                mascotasList.add(Mascota(mascotaSnapshot.key!!, nombre, raza))
                             }
                         }
 
@@ -223,9 +284,35 @@ class PerfilFragment : Fragment(), OnLoginResultListener{
             val rc_pets_r = view?.findViewById<RecyclerView>(R.id.recyclerViewPetBreed)
             rc_pets_r?.layoutManager = LinearLayoutManager(requireContext())
 
+
             // Crear adaptadores con la lista de mascotas
-            val pet_adapter_n = NombresAdapter(mascotasList.map { Mascota(it.nombre, it.raza) })
-            val pet_adapter_r = RazasAdapter(mascotasList.map { Mascota(it.nombre, it.raza) })
+            val pet_adapter_n = NombresAdapter(mascotasList.map { Mascota(it.id, it.nombre, it.raza) })
+            val pet_adapter_r = RazasAdapter(mascotasList.map { Mascota(it.id, it.nombre, it.raza) })
+
+            // Adjuntar ItemTouchHelper al RecyclerView
+            val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
+                0, ItemTouchHelper.RIGHT
+            ) {
+                override fun onMove(
+                    recyclerView: RecyclerView,
+                    viewHolder: RecyclerView.ViewHolder,
+                    target: RecyclerView.ViewHolder
+                ): Boolean {
+                    // Llama a la función onItemMove del adaptador al mover un elemento
+                    pet_adapter_n.onItemMove(viewHolder.adapterPosition, target.adapterPosition)
+                    pet_adapter_r.onItemMove(viewHolder.adapterPosition, target.adapterPosition)
+                    return true
+                }
+
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                    // Llama a la función onItemDismiss del adaptador al deslizar un elemento
+                    pet_adapter_n.onItemDismiss(viewHolder.adapterPosition)
+                    pet_adapter_r.onItemDismiss(viewHolder.adapterPosition)
+                }
+            })
+
+            itemTouchHelper.attachToRecyclerView(rc_pets_n)
+            itemTouchHelper.attachToRecyclerView(rc_pets_r)
 
             // Notificar a los adaptadores que los datos han cambiado
             pet_adapter_n.notifyDataSetChanged()
