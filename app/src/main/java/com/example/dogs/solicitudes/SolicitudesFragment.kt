@@ -14,6 +14,7 @@ import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.isEmpty
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
@@ -22,7 +23,9 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import androidx.recyclerview.widget.RecyclerView
+import com.example.dogs.maps.LocationService
 import com.google.firebase.database.DatabaseReference
+import kotlinx.coroutines.launch
 import java.util.Collections
 
 class SolicitudesFragment : Fragment() {
@@ -270,24 +273,32 @@ class SolicitudesFragment : Fragment() {
         }
     }
 
+    private val locationService = LocationService()  // Agrega esta línea para instanciar el servicio de ubicación
+
     private fun guardarSolicitud(peticion: String, nombre: String) {
         val userId = auth.currentUser?.uid
         if (userId != null) {
-            val userDB = dbReference.child("User").child(userId)
+            lifecycleScope.launch {
+                val location = locationService.getUserLocation(requireContext())
 
-            // Generar un nuevo identificador único para la mascota
-            val solicitudId = userDB.child("Solicitud").push().key
+                val userDB = dbReference.child("User").child(userId)
 
-            // Guardar la información de la mascota en el nodo del usuario
-            val nuevaSolicitud = hashMapOf(
-                "peticion" to peticion,
-                "nombre" to nombre,
-                "estado" to true,
-                "paseador" to "Sin paseador"
-            )
-            userDB.child("Solicitud").child(solicitudId!!).setValue(nuevaSolicitud)
+                // Generar un nuevo identificador único para la mascota
+                val solicitudId = userDB.child("Solicitud").push().key
 
-            Toast.makeText(context, "Solicitud realizada exitosamente", Toast.LENGTH_SHORT).show()
+                // Guardar la información de la mascota en el nodo del usuario
+                val nuevaSolicitud = hashMapOf(
+                    "peticion" to peticion,
+                    "nombre" to nombre,
+                    "estado" to true,
+                    "paseador" to "Sin paseador",
+                    "latitud" to location?.latitude,
+                    "longitud" to location?.longitude
+                )
+                userDB.child("Solicitud").child(solicitudId!!).setValue(nuevaSolicitud)
+
+                Toast.makeText(context, "Solicitud realizada exitosamente", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
